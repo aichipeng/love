@@ -16,6 +16,9 @@
       <!-- <input type="text" id="text" placeholder="送给你的那个[Ta]️"> -->
       <div id="text">大宝贝！我爱你</div>
     </div>
+    <audio id="audio" autoplay loop>
+      <source src="./test.m4a">
+    </audio>
   </div>
 </body>
 <script>
@@ -28,7 +31,8 @@
       size: 30, // particle size in pixels
     },
   };
-
+  var audio = document.getElementById("audio")
+  audio.play()
   // (function () {
   //   var b = 0;
   //   var c = ["ms", "moz", "webkit", "o"];
@@ -298,9 +302,11 @@
     padding: 0;
     margin: 0;
   }
-
+  html {
+    height: 100%;
+  }
   body {
-    height: 600px;
+    height: 100%;
     padding: 0;
     margin: 0;
     background: #fff;
@@ -313,7 +319,6 @@
     width: 500px;
     height: 500px;
     position: relative;
-    transform: translateY(20%);
   }
 
   canvas {
