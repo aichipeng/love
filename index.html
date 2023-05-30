@@ -21,10 +21,22 @@
       margin: 0;
       padding-bottom: 10%;
       box-sizing: border-box;
-      background: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
+      animation: background 5s infinite ease-in-out;
+    }
+
+    @keyframes background {
+
+      0%,
+      100% {
+        background: #fff
+      }
+
+      50% {
+        background: #000
+      }
     }
 
     .container {
@@ -88,6 +100,34 @@
         transform: rotate(2deg) scale(1.12);
       }
     }
+
+    .name {
+      font-size: 24px;
+      color: #fff;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: opacity 5s infinite ease-in-out;
+    }
+
+    .name img {
+      width: 30px;
+      height: 30px;
+      margin: 0 20px;
+    }
+
+    @keyframes opacity {
+
+      0%,
+      100% {
+        opacity: 0;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 
@@ -100,14 +140,15 @@
       <!-- <input type="text" id="text" placeholder="送给你的那个[Ta]️"> -->
       <div id="text">大宝贝！我爱你</div>
     </div>
-    <audio id="audio" autoplay loop >
+    <audio id="audio" autoplay loop>
       <source src="./test.m4a">
     </audio>
+    <div class="name">艾迟鹏 <img src="./love.png" alt=""> 王敏惠</div>
   </div>
 </body>
 <script>
   var ua = navigator.userAgent.toLowerCase()
-  if (ua.match(/MicroMessenger/i) !== "micromessenger") {
+  if (ua.match(/MicroMessenger/i) == "micromessenger") {
     //在微信中打开
     audioAutoPlay('audio')
   } else {
