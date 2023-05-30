@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>爱心</title>
-  <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
 </head>
 
 <body>
@@ -22,17 +22,30 @@
   </div>
 </body>
 <script>
-  var settings = {
-    particles: {
-      length: 500, // maximum amount of particles
-      duration: 2, // particle duration in sec
-      velocity: 100, // particle velocity in pixels/sec
-      effect: -0.75, // play with this for a nice effect
-      size: 30, // particle size in pixels
-    },
-  };
-  var audio = document.getElementById("audio")
-  audio.play()
+  if (navigator.userAgent.match(/MicroMessenger/i) == "micromessenger") {
+    //在微信中打开
+    audioAutoplay('audio')
+  } else {
+    let audio = document.getElementById('audio');
+    audio.play()
+  }
+
+  function audioAutoPlay(id) {
+    var audio = document.getElementById(id);
+    if (window.WeixinJSBridge) {
+      WeixinJSBridge.invoke('getNetworkType', {}, function (e) {
+        audio.play();
+      }, false);
+    } else {
+      document.addEventListener("WeixinJSBridgeReady", function () {
+        WeixinJSBridge.invoke('getNetworkType', {}, function (e) {
+          audio.play();
+        });
+      }, false);
+    }
+    audio.play();
+    return false;
+  }
   // (function () {
   //   var b = 0;
   //   var c = ["ms", "moz", "webkit", "o"];
@@ -59,7 +72,15 @@
   //     };
   //   }
   // })();
-
+  var settings = {
+    particles: {
+      length: 500, // maximum amount of particles
+      duration: 2, // particle duration in sec
+      velocity: 100, // particle velocity in pixels/sec
+      effect: -0.75, // play with this for a nice effect
+      size: 30, // particle size in pixels
+    },
+  };
   /*
    * Point class
    */
@@ -302,9 +323,11 @@
     padding: 0;
     margin: 0;
   }
+
   html {
     height: 100%;
   }
+
   body {
     height: 100%;
     padding: 0;
@@ -319,6 +342,7 @@
     width: 500px;
     height: 500px;
     position: relative;
+    transform: translateY(-50%);
   }
 
   canvas {
